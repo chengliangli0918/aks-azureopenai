@@ -3,6 +3,7 @@
 # Variables
 source ./set-variables.sh
 
+echo $image
 export KUBECONFIG=$aksKubeConfigPath
 # Attach ACR to AKS cluster
 if [[ $attachAcr == true ]]; then
@@ -24,23 +25,19 @@ else
   kubectl create namespace $namespace
 fi
 
-# Create config map
-cat $configMapTemplate |
-    yq "(.data.TITLE)|="\""$title"\" |
-    yq "(.data.LABEL)|="\""$label"\" |
-    yq "(.data.TEMPERATURE)|="\""$temperature"\" |
-    yq "(.data.IMAGE_WIDTH)|="\""$imageWidth"\" |
-    yq "(.data.AZURE_OPENAI_TYPE)|="\""$openAiType"\" |
-    yq "(.data.AZURE_OPENAI_BASE)|="\""$openAiBase"\" |
-    yq "(.data.AZURE_OPENAI_MODEL)|="\""$openAiModel"\" |
-    yq "(.data.AZURE_OPENAI_DEPLOYMENT)|="\""$openAiDeployment"\" |
-    kubectl apply -n $namespace -f -
-
 # Create deployment
 cat $deploymentTemplate |
     yq "(.spec.template.spec.containers[0].image)|="\""$image"\" |
     yq "(.spec.template.spec.containers[0].imagePullPolicy)|="\""$imagePullPolicy"\" |
     yq "(.spec.template.spec.serviceAccountName)|="\""$serviceAccountName"\" |
+    yq "(.spec.template.spec.containers[0].env[0].value)|="\""$title"\" |
+    yq "(.spec.template.spec.containers[0].env[1].value)|="\""$label"\" |
+    yq "(.spec.template.spec.containers[0].env[2].value)|="\""$temperature"\" |
+    yq "(.spec.template.spec.containers[0].env[3].value)|="\""$imageWidth"\" |
+    yq "(.spec.template.spec.containers[0].env[4].value)|="\""$openAiType"\" |
+    yq "(.spec.template.spec.containers[0].env[5].value)|="\""$openAiBase"\" |
+    yq "(.spec.template.spec.containers[0].env[6].value)|="\""$openAiModel"\" |
+    yq "(.spec.template.spec.containers[0].env[7].value)|="\""$openAiDeployment"\" |
     kubectl apply -n $namespace -f -
 
 # Create deployment

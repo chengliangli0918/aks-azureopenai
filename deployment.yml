@@ -77,47 +77,20 @@ spec:
           timeoutSeconds: 5
         env:
         - name: TITLE
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: TITLE
-        - name: IMAGE_WIDTH
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: IMAGE_WIDTH
+          value: "My Chatbot"
         - name: LABEL
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: LABEL
+          value: "Askmeanything"
         - name: TEMPERATURE
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: TEMPERATURE
+          value: "0.9"
+        - name: IMAGE_WIDTH
+          value: "100"
         - name: AZURE_OPENAI_TYPE
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: AZURE_OPENAI_TYPE
+          value: "azure"
         - name: AZURE_OPENAI_BASE
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: AZURE_OPENAI_BASE
-        - name: AZURE_OPENAI_KEY
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: AZURE_OPENAI_KEY
+          value: "openai_base"
         - name: AZURE_OPENAI_MODEL
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: AZURE_OPENAI_MODEL
+          value: "model"
         - name: AZURE_OPENAI_DEPLOYMENT
-          valueFrom:
-            configMapKeyRef:
-                name: mychatbot-configmap
-                key: AZURE_OPENAI_DEPLOYMENT
+          value: "deployment name"
+        - name: AZURE_OPENAI_KEY
+          value: " "

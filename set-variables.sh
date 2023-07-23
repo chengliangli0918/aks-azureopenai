@@ -9,7 +9,7 @@ acrResourceGrougName="aks-openai"
 location="eastus"
 attachAcr=false
 imageName="mychatbot"
-tag="v1"
+tag="v0"
 containerName="mychatbot"
 image="$acrName.azurecr.io/$imageName:$tag"
 imagePullPolicy="IfNotPresent"
@@ -36,7 +36,6 @@ namespace="default"
 serviceAccountName="workload-identity-sa"
 deploymentTemplate="deployment.yml"
 serviceTemplate="service.yml"
-configMapTemplate="configMap.yml"
 
 # Chatbot argument
 title="Chatbot backed by AKS and Azure OpenAi"
