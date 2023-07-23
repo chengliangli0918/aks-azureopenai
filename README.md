@@ -15,7 +15,7 @@ products:
 - azure-virtual-network
 - azure-virtual-machines
 name:  How to create an AKS cluster and run chatbot application to access Azure OpenAI using Workload Identity
-description: This sample shows how to install an AKS cluster with the Istio service mesh add-on via Terraform.
+description: This sample shows how to install an AKS cluster and run chatbot application to access Azure OpenAI using Workload Identity.
 ---
 
 # How to deploy and run an Azure OpenAI ChatGPT application on AKS
