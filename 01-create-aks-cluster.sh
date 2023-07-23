@@ -27,7 +27,6 @@ if [[ $? != 0 ]]; then
     --resource-group $aksResourceGroupName \
     --location $location \
     --subscription $subscriptionId \
-    --node-count 2 \
     --enable-oidc-issuer \
     --enable-workload-identity \
     --generate-ssh-keys 1>/dev/null
