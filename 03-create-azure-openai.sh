@@ -3,6 +3,14 @@
 # Variables
 source ./set-variables.sh
 
+# Check if OpenAI resource group exists
+az group show --name $openAiResourceGroupName &>/dev/null
+if [[ $? != 0 ]]; then
+   az group create \
+    --name $openAiResourceGroupName \
+    --location $location 1>/dev/null
+fi
+
 # Check if Azure OpenAI already exists
 echo "Checking if Azure OpenAI [$openAiName] actually exists in the [$openAiResourceGroupName] resource group..."
 

@@ -3,9 +3,16 @@
 # Variables
 source ./set-variables.sh
 
+# Check if AKS resource group exists
+az group show --name $aksResourceGroupName &>/dev/null
+if [[ $? != 0 ]]; then
+   az group create \
+    --name $aksResourceGroupName  \
+    --location $location 1>/dev/null
+fi
+
 # Check if Azure Kubernetes Service already exists
 echo "Checking if AKS [$aksClusterName] actually exists in the [$aksResourceGroupName] resource group..."
-
 az aks show \
   --name $aksClusterName \
   --resource-group $aksResourceGroupName &>/dev/null

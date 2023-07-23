@@ -3,6 +3,14 @@
 # Variables
 source ./set-variables.sh
 
+# Check if ACR resource group exists
+az group show --name $acrResourceGroupName &>/dev/null
+if [[ $? != 0 ]]; then
+   az group create \
+    --name $acrResourceGroupName \
+    --location $location 1>/dev/null
+fi
+
 # Check if Azure Container Registry already exists
 echo "Checking if ACR [$acrName] actually exists in the [$acrResourceGrougName] resource group..."
 
