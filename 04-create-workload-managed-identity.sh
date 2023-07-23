@@ -77,7 +77,7 @@ fi
 
 # Assign the Cognitive Services User role on the Azure OpenAI resource to the managed identity
 role="Cognitive Services User"
-echo "Checking if the [$managedIdentityName] managed identity has been assigned to [$role] role with [$openAiName] Azure OpenAI resource as a scope..."
+echo "Checking if the [$managedIdentityName] managed identity has been assigned to [$role] role in scope of [$openAiName] Azure OpenAI resource..."
 current=$(az role assignment list \
   --assignee $principalId \
   --scope $openAiId \
@@ -85,9 +85,9 @@ current=$(az role assignment list \
   --output tsv 2>/dev/null)
 
 if [[ $current == $role ]]; then
-  echo "[$managedIdentityName] managed identity is already assigned to the ["$current"] role with [$openAiName] Azure OpenAI resource as a scope"
+  echo "[$managedIdentityName] managed identity is already assigned to the ["$current"] role in scope of [$openAiName] Azure OpenAI resource"
 else
-  echo "[$managedIdentityName] managed identity is not assigned to the [$role] role with [$openAiName] Azure OpenAI resource as a scope"
+  echo "[$managedIdentityName] managed identity is not assigned to the [$role] role in scope of [$openAiName] Azure OpenAI resource"
   
   for i in {1..30}  #take some time to assign role for newly create managed identity to azure resources 
   do   
