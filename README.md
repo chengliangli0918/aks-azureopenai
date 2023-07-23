@@ -24,8 +24,11 @@ This sample shows how to deploy an [Azure Kubernetes Service(AKS)](https://docs.
 
 A chatbot is an application that simulates human-like conversations with users via chat. Its key task is to answer user questions with instant messages. [Azure Kubernetes Service(AKS)](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes) cluster communicates with [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview).
 
-![Chatbot backed AKS and Azure OpenAI](/images/chatbotaksopenai.png)
-
+<div align="center">
+  <a rel="nofollow" href="https://github.com/chengliangli0918/aks-azureopenai/">
+    <img width="60%" src="./images/chatbotaksopenai.png">
+  </a>
+</div>
 
 For more information on Azure OpenAI Service, see the following articles:
 
