@@ -78,19 +78,15 @@ spec:
         env:
         - name: TITLE
           value: "My Chatbot"
-        - name: LABEL
-          value: "Askmeanything"
         - name: TEMPERATURE
           value: "0.9"
-        - name: IMAGE_WIDTH
-          value: "100"
         - name: AZURE_OPENAI_TYPE
-          value: "azure"
+          value: "azure_ad"
         - name: AZURE_OPENAI_BASE
-          value: "openai_base"
+          value: "https://charlili-openai.openai.azure.com/"
         - name: AZURE_OPENAI_MODEL
-          value: "model"
+          value: "gpt-35-turbo"
         - name: AZURE_OPENAI_DEPLOYMENT
-          value: "deployment name"
+          value: "gpt-35-turbo"
         - name: AZURE_OPENAI_KEY
           value: " "

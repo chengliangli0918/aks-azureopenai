@@ -34,10 +34,9 @@ aksKubeConfigPath="/tmp/kubeconfig"
 # Chatbot Application
 namespace="default"
 serviceAccountName="workload-identity-sa"
-deploymentTemplate="deployment.yml"
-serviceTemplate="service.yml"
+deploymentTemplate="deployment.yaml"
+serviceTemplate="service.yaml"
 
 # Chatbot argument
-title="Chatbot backed by AKS and Azure OpenAi"
+title="Chatbot backed by AKS and Azure OpenAI"
 temperature="0.5"
-imageWidth="80"
