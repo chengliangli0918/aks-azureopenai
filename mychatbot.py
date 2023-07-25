@@ -23,6 +23,7 @@ api_type = os.environ.get("AZURE_OPENAI_TYPE", "azure")
 api_version = os.environ.get("AZURE_OPENAI_VERSION", "2023-05-15")
 engine = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 model = os.getenv("AZURE_OPENAI_MODEL")
+default_credential = None
 image_width = 80
 
 def main():
@@ -69,6 +70,9 @@ def main():
         streamlit.markdown("""---""") 
 
 def configure_azure_openai():
+  # Set default Azure credential
+  default_credential = DefaultAzureCredential() if api_type == "azure_ad" else None
+
   # Authenticate to Azure OpenAI
   if api_type == "azure":
     openai.api_key = api_key
@@ -79,9 +83,6 @@ def configure_azure_openai():
       streamlit.session_state['openai_token'] = openai_token
   else:
     raise ValueError("Invalid API type. Please set the AZURE_OPENAI_TYPE environment variable to azure or azure_ad.")
-
-  # Set default Azure credential
-  default_credential = DefaultAzureCredential() if api_type == "azure_ad" else None
 
   # Configure Azure OpenAI
   openai.api_type = api_type
