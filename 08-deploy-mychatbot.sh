@@ -31,13 +31,11 @@ cat $deploymentTemplate |
     yq "(.spec.template.spec.containers[0].imagePullPolicy)|="\""$imagePullPolicy"\" |
     yq "(.spec.template.spec.serviceAccountName)|="\""$serviceAccountName"\" |
     yq "(.spec.template.spec.containers[0].env[0].value)|="\""$title"\" |
-    yq "(.spec.template.spec.containers[0].env[1].value)|="\""$label"\" |
-    yq "(.spec.template.spec.containers[0].env[2].value)|="\""$temperature"\" |
-    yq "(.spec.template.spec.containers[0].env[3].value)|="\""$imageWidth"\" |
-    yq "(.spec.template.spec.containers[0].env[4].value)|="\""$openAiType"\" |
-    yq "(.spec.template.spec.containers[0].env[5].value)|="\""$openAiBase"\" |
-    yq "(.spec.template.spec.containers[0].env[6].value)|="\""$openAiModel"\" |
-    yq "(.spec.template.spec.containers[0].env[7].value)|="\""$openAiDeployment"\" |
+    yq "(.spec.template.spec.containers[0].env[1].value)|="\""$temperature"\" |
+    yq "(.spec.template.spec.containers[0].env[2].value)|="\""$openAiType"\" |
+    yq "(.spec.template.spec.containers[0].env[3].value)|="\""$openAiBase"\" |
+    yq "(.spec.template.spec.containers[0].env[4].value)|="\""$openAiModel"\" |
+    yq "(.spec.template.spec.containers[0].env[5].value)|="\""$openAiDeployment"\" |
     kubectl apply -n $namespace -f -
 
 # Create deployment
