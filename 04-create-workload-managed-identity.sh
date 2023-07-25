@@ -89,7 +89,7 @@ if [[ $current == $role ]]; then
 else
   echo "'$managedIdentityName' managed identity is not assigned to the '$role' role in scope of $openAiName' Azure OpenAI resource"
   
-  for i in {1..30}  #take some time to assign role for newly create managed identity to azure resources 
+  for i in {1..30}  #take some time to assign role for newly created managed identity to azure resources
   do   
     echo "Assigning the '$role' role to the '$managedIdentityName' managed identity with $openAiName' Azure OpenAI resource, attempt $i... "
     az role assignment create \
