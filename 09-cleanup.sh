@@ -3,7 +3,7 @@
 # Variables
 source ./set-variables.sh
 
-echo "Delete and purge Azure OpenAI [$openAiName] in the [$openAiResourceGroupName] resource group..."
+echo "Delete and purge Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group..."
 
 az cognitiveservices account delete -n $openAiName -g $openAiResourceGroupName
 az cognitiveservices account purge -n $openAiName -g $openAiResourceGroupName -l $location

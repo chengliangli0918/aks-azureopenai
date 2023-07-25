@@ -8,11 +8,11 @@ export KUBECONFIG=$aksKubeConfigPath
 result=$(kubectl get namespace -o 'jsonpath={.items[?(@.metadata.name=="'$namespace'")].metadata.name'})
 
 if [[ -n $result ]]; then
-  echo "[$namespace] namespace already exists"
+  echo "'$namespace' namespace already exists"
 else
   # Create the namespace for your ingress resources
-  echo "[$namespace] namespace does not exist"
-  echo "Creating [$namespace] namespace..."
+  echo "'$namespace' namespace does not exist"
+  echo "Creating '$namespace' namespace..."
   kubectl create namespace $namespace
 fi
 
@@ -20,10 +20,10 @@ fi
 result=$(kubectl get sa -n $namespace -o 'jsonpath={.items[?(@.metadata.name=="'$serviceAccountName'")].metadata.name'})
 
 if [[ -n $result ]]; then
-  echo "[$serviceAccountName] service account already exists"
+  echo "'$serviceAccountName' service account already exists"
 else
   # Retrieve the resource id of the user-assigned managed identity
-  echo "Retrieving clientId for [$managedIdentityName] managed identity..."
+  echo "Retrieving clientId for '$managedIdentityName' managed identity..."
   managedIdentityClientId=$(az identity show \
     --name $managedIdentityName \
     --resource-group $aksResourceGroupName \
@@ -31,15 +31,15 @@ else
     --output tsv)
 
   if [[ -n $managedIdentityClientId ]]; then
-    echo "[$managedIdentityClientId] clientId  for the [$managedIdentityName] managed identity successfully retrieved"
+    echo "'$managedIdentityClientId'clientId  for the '$managedIdentityName' managed identity successfully retrieved"
   else
-    echo "Failed to retrieve clientId for the [$managedIdentityName] managed identity"
+    echo "Failed to retrieve clientId for the '$managedIdentityName' managed identity"
     exit
   fi
 
   # Create the service account
-  echo "[$serviceAccountName] service account does not exist"
-  echo "Creating [$serviceAccountName] service account..."
+  echo "'$serviceAccountName' service account does not exist"
+  echo "Creating '$serviceAccountName' service account..."
   cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ServiceAccount
@@ -60,7 +60,7 @@ echo "-----------------------------"
 kubectl get sa $serviceAccountName -n $namespace -o yaml
 
 # Check if the federated identity credential already exists
-echo "Checking if [$federatedIdentityName] federated identity credential actually exists in the [$aksResourceGroupName] resource group..."
+echo "Checking if '$federatedIdentityName' federated identity credential actually exists in the '$aksResourceGroupName' resource group..."
 
 az identity federated-credential show \
   --name $federatedIdentityName \
@@ -68,7 +68,7 @@ az identity federated-credential show \
   --identity-name $managedIdentityName &>/dev/null
 
 if [[ $? != 0 ]]; then
-  echo "No [$federatedIdentityName] federated identity credential actually exists in the [$aksResourceGroupName] resource group"
+  echo "No '$federatedIdentityName' federated identity credential actually exists in the '$aksResourceGroupName' resource group"
 
   # Get the OIDC Issuer URL
   aksOidcIssuerUrl="$(az aks show \
@@ -83,7 +83,7 @@ if [[ $? != 0 ]]; then
     echo "The OIDC Issuer URL of the $aksClusterName cluster is $aksOidcIssuerUrl"
   fi
 
-  echo "Creating [$federatedIdentityName] federated identity credential in the [$aksResourceGroupName] resource group..."
+  echo "Creating '$federatedIdentityName' federated identity credential in the '$aksResourceGroupName' resource group..."
 
   # Establish the federated identity credential between the managed identity, the service account issuer, and the subject.
   az identity federated-credential create \
@@ -94,11 +94,11 @@ if [[ $? != 0 ]]; then
     --subject system:serviceaccount:$namespace:$serviceAccountName
 
   if [[ $? == 0 ]]; then
-    echo "[$federatedIdentityName] federated identity credential successfully created in the [$aksResourceGroupName] resource group"
+    echo "'$federatedIdentityName' federated identity credential successfully created in the '$aksResourceGroupName' resource group"
   else
-    echo "Failed to create [$federatedIdentityName] federated identity credential in the [$aksResourceGroupName] resource group"
+    echo "Failed to create '$federatedIdentityName' federated identity credential in the '$aksResourceGroupName' resource group"
     exit
   fi
 else
-  echo "[$federatedIdentityName] federated identity credential already exists in the [$aksResourceGroupName] resource group"
+  echo "'$federatedIdentityName' federated identity credential already exists in the '$aksResourceGroupName' resource group"
 fi

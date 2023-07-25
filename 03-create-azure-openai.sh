@@ -12,15 +12,15 @@ if [[ $? != 0 ]]; then
 fi
 
 # Check if Azure OpenAI already exists
-echo "Checking if Azure OpenAI [$openAiName] actually exists in the [$openAiResourceGroupName] resource group..."
+echo "Checking if Azure OpenAI '$openAiName' actually exists in the '$openAiResourceGroupName' resource group..."
 
 az cognitiveservices account show \
   --name $openAiName \
   --resource-group $openAiResourceGroupName &>/dev/null
 
 if [[ $? != 0 ]]; then
-  echo "No Azure OpenAI [$openAiName] actually exists in the [$openAiResourceGroupName] resource group"
-  echo "Creating Azure OpenAI [$openAiName] in the [$openAiResourceGroupName] resource group..."
+  echo "No Azure OpenAI '$openAiName' actually exists in the '$openAiResourceGroupName' resource group"
+  echo "Creating Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group..."
 
 
 # Create Azure OpenAI account
@@ -35,9 +35,9 @@ az cognitiveservices account create \
   1>/dev/null
 
   if [[ $? == 0 ]]; then
-    echo "Azure OpenAI [$openAiName] successfully created in the [$openAiResourceGroupName] resource group"
+    echo "Azure OpenAI '$openAiName' successfully created in the '$openAiResourceGroupName' resource group"
   else
-    echo "Failed to create Azure OpenAI [$openAiName] in the [$openAiResourceGroupName] resource group"
+    echo "Failed to create Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group"
     exit
   fi
 
@@ -51,8 +51,5 @@ az cognitiveservices account create \
     --scale-settings-scale-type "Standard" \
     --model-version 0301
 else
-  echo "Azure OpenAI [$openAiName] already exists in the [$openAiResourceGroupName] resource group"
+  echo "Azure OpenAI '$openAiName' already exists in the '$openAiResourceGroupName' resource group"
 fi
-
-# az cognitiveservices account delete -n $openAiName -g $openAiResourceGroupName
-# az cognitiveservices account purge -n $openAiName -g $openAiResourceGroupName -l $location

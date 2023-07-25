@@ -12,15 +12,15 @@ if [[ $? != 0 ]]; then
 fi
 
 # Check if Azure Container Registry already exists
-echo "Checking if ACR [$acrName] actually exists in the [$acrResourceGrougName] resource group..."
+echo "Checking if ACR '$acrName' actually exists in the '$acrResourceGrougName' resource group..."
 
 az acr show \
   --name $acrName \
   --resource-group $acrResourceGrougName &>/dev/null
 
 if [[ $? != 0 ]]; then
-  echo "No ACR [$acrName] actually exists in the [$acrResourceGrougName] resource group"
-  echo "Creating ACR [$acrName] in the [$acrResourceGrougName] resource group..."
+  echo "No ACR '$acrName' actually exists in the '$acrResourceGrougName' resource group"
+  echo "Creating ACR '$acrName' in the '$acrResourceGrougName' resource group..."
 
   # Create the acr
   az acr create \
@@ -31,9 +31,9 @@ if [[ $? != 0 ]]; then
     --sku Standard 1>/dev/null
 
   if [[ $? == 0 ]]; then
-    echo "ACR [$acrName] successfully created in the [$acrResourceGrougName] resource group"
+    echo "ACR '$acrName' successfully created in the '$acrResourceGrougName' resource group"
   else
-    echo "Failed to create ACR [$acrName] in the [$acrResourceGrougName] resource group"
+    echo "Failed to create ACR '$acrName' in the '$acrResourceGrougName' resource group"
     exit
   fi
 
@@ -43,5 +43,5 @@ if [[ $? != 0 ]]; then
     --subscription $subscriptionId \
     --anonymous-pull-enabled 1>/dev/null
 else
-  echo "ACR [$acrName] already exists in the [$acrResourceGrougName] resource group"
+  echo "ACR '$acrName' already exists in the '$acrResourceGrougName' resource group"
 fi
