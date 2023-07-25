@@ -5,7 +5,7 @@ tenantId=$(az account show --query tenantId --output tsv)
 
 # ACR
 acrName="charliliacr"
-acrResourceGrougName="aks-openai"
+acrResourceGrougName="aks-azureopenai"
 location="eastus"
 attachAcr=false
 imageName="mychatbot"
@@ -20,7 +20,7 @@ federatedIdentityName="myFedIdentity"
 
 # Azure OpenAI
 openAiName="charlili-openai"
-openAiResourceGroupName="aks-openai"
+openAiResourceGroupName="aks-azureopenai"
 openAiType="azure_ad"
 openAiBase="https://$openAiName.openai.azure.com/"
 openAiModel="gpt-35-turbo"
@@ -28,7 +28,7 @@ openAiDeployment="gpt-35-turbo"
 
 # AKS Cluster
 aksClusterName="charlili-aks"
-aksResourceGroupName="aks-openai"
+aksResourceGroupName="aks-azureopenai"
 aksKubeConfigPath="/tmp/kubeconfig"
 
 # Chatbot Application
