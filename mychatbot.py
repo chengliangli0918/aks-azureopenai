@@ -91,6 +91,7 @@ def configure_azure_openai():
 
 def customize_streamlit_ui():
   # Customize Streamlit UI using CSS
+  streamlit.set_page_config(page_title='MyChatbot on AKS and AzureOpenAI')
   streamlit.markdown("""
   <style>
 
@@ -172,7 +173,6 @@ def customize_streamlit_ui():
   footer {visibility: hidden;}
   </style>
   """, unsafe_allow_html=True)
-
 
   # Initialize Streamlit session state
   if 'prompts' not in streamlit.session_state:
