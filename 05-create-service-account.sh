@@ -31,7 +31,7 @@ else
     --output tsv)
 
   if [[ -n $managedIdentityClientId ]]; then
-    echo "'$managedIdentityClientId'clientId  for the '$managedIdentityName' managed identity successfully retrieved"
+    echo "'$managedIdentityClientId' clientId for the '$managedIdentityName' managed identity successfully retrieved"
   else
     echo "Failed to retrieve clientId for the '$managedIdentityName' managed identity"
     exit

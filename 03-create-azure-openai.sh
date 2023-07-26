@@ -22,17 +22,16 @@ if [[ $? != 0 ]]; then
   echo "No Azure OpenAI '$openAiName' actually exists in the '$openAiResourceGroupName' resource group"
   echo "Creating Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group..."
 
-
-# Create Azure OpenAI account
-az cognitiveservices account create \
-  -n $openAiName \
-  -g $openAiResourceGroupName \
-  -l $location \
-  --kind OpenAI \
-  --sku s0 \
-  --custom-domain $openAiName \
-  --subscription $subscriptionId \
-  1>/dev/null
+  # Create Azure OpenAI account
+  az cognitiveservices account create \
+    -n $openAiName \
+    -g $openAiResourceGroupName \
+    -l $location \
+    --kind OpenAI \
+    --sku s0 \
+    --custom-domain $openAiName \
+    --subscription $subscriptionId \
+    1>/dev/null
 
   if [[ $? == 0 ]]; then
     echo "Azure OpenAI '$openAiName' successfully created in the '$openAiResourceGroupName' resource group"
@@ -49,7 +48,14 @@ az cognitiveservices account create \
     --model-name $openAiModel \
     --model-format OpenAI \
     --scale-settings-scale-type "Standard" \
-    --model-version 0301
+    --model-version 0301 1>/dev/null
+
+  if [[ $? == 0 ]]; then
+    echo "Deployment $openAiDeployment successfully created for Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group"
+  else
+    echo "Failed to create Deployment $openAiDeployment for Azure OpenAI '$openAiName' in the '$openAiResourceGroupName' resource group"
+    exit
+  fi
 else
   echo "Azure OpenAI '$openAiName' already exists in the '$openAiResourceGroupName' resource group"
 fi

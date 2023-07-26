@@ -77,7 +77,7 @@ fi
 
 # Assign the Cognitive Services User role on the Azure OpenAI resource to the managed identity
 role="Cognitive Services User"
-echo "Checking if the '$managedIdentityName' managed identity has been assigned to '$role' role in scope of $openAiName' Azure OpenAI resource..."
+echo "Checking if the '$managedIdentityName' managed identity has been assigned to '$role' role of $openAiName' Azure OpenAI resource..."
 current=$(az role assignment list \
   --assignee $principalId \
   --scope $openAiId \
@@ -85,23 +85,23 @@ current=$(az role assignment list \
   --output tsv 2>/dev/null)
 
 if [[ $current == $role ]]; then
-  echo "'$managedIdentityName' managed identity is already assigned to the '$current' role in scope of $openAiName' Azure OpenAI resource"
+  echo "'$managedIdentityName' managed identity is already assigned to the '$current' role of $openAiName' Azure OpenAI resource"
 else
-  echo "'$managedIdentityName' managed identity is not assigned to the '$role' role in scope of $openAiName' Azure OpenAI resource"
+  echo "'$managedIdentityName' managed identity is not assigned to the '$role' role of $openAiName' Azure OpenAI resource"
   
   for i in {1..30}  #take some time to assign role for newly created managed identity to azure resources
   do   
-    echo "Assigning the '$role' role to the '$managedIdentityName' managed identity with $openAiName' Azure OpenAI resource, attempt $i... "
+    echo "Assigning the '$role' role for the '$managedIdentityName' managed identity to $openAiName' Azure OpenAI resource, attempt $i... "
     az role assignment create \
       --assignee $principalId \
       --role "$role" \
       --scope $openAiId 1>/dev/null
 
     if [[ $? == 0 ]]; then
-      echo "'$managedIdentityName' managed identity successfully assigned to the '$role' role with $openAiName' Azure OpenAI resource"
+      echo "'$managedIdentityName' managed identity successfully assigned to the '$role' role of $openAiName' Azure OpenAI resource"
       break
     else
-      echo "Failed to assign the '$managedIdentityName' managed identity to the '$role' role with $openAiName' Azure OpenAI resource, will retry"
+      echo "Failed to assign the '$managedIdentityName' managed identity to the '$role' role of $openAiName' Azure OpenAI resource, will retry"
       sleep 2
     fi
   done
