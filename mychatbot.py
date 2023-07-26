@@ -15,14 +15,14 @@ I am a chatbot backed by AKS and Azure OpenAi
 """
 title = os.environ.get("TITLE", "Chatbot backed by AKS and Azure OpenAI")
 image_file_name = os.environ.get("IMAGE_FILE_NAME", "mychatbot.png")
-temperature = float(os.environ.get("TEMPERATURE", 0.5))
 system = os.environ.get("SYSTEM", assistant_profile)
+api_type = os.environ.get("AZURE_OPENAI_TYPE", "azure")
 api_base = os.getenv("AZURE_OPENAI_BASE")
 api_key = os.getenv("AZURE_OPENAI_KEY")
-api_type = os.environ.get("AZURE_OPENAI_TYPE", "azure")
 api_version = os.environ.get("AZURE_OPENAI_VERSION", "2023-05-15")
 engine = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 model = os.getenv("AZURE_OPENAI_MODEL")
+temperature = float(os.environ.get("TEMPERATURE", 0.5))
 default_credential = None
 image_width = 80
 
@@ -39,9 +39,9 @@ def main():
   with col1:
     streamlit.image(image = os.path.join("images", image_file_name), width = image_width)
 
-  # Display the title
+  # Display the header
   with col2:
-    streamlit.title(title)
+    streamlit.header(title)
 
   col3, col4, col5 = streamlit.columns([6, 1, 1])
 
@@ -61,7 +61,7 @@ def main():
     tab1, tab2 = streamlit.tabs(["Dialogue", "Text"])
     with tab1:
       for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
-        message(streamlit.session_state['past'][i], is_user = True, key = str(i) + '_user', avatar_style = "big-smile", seed = 678)
+        message(streamlit.session_state['past'][i], is_user = True, key = str(i) + '_user', avatar_style = "adventurer", seed = 678)
         message(streamlit.session_state['generated'][i], key = str(i), avatar_style = "bottts", seed = 456)
     with tab2:
       for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
@@ -169,7 +169,6 @@ def customize_streamlit_ui():
     }
   }
 
-  #MainMenu {visibility: hidden;}
   footer {visibility: hidden;}
   </style>
   """, unsafe_allow_html=True)
