@@ -58,16 +58,16 @@ def main():
     streamlit.button(label = "Clean", on_click = clean_click)
 
   if streamlit.session_state['generated']:
-    tab1, tab2 = streamlit.tabs(["Dialogue", "Text"])
+    tab1, tab2 = streamlit.tabs(["Text", "Dialogue"])
     with tab1:
+      for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
+        streamlit.markdown("**:blue[{}]**".format(streamlit.session_state['past'][i]))
+        streamlit.markdown(streamlit.session_state['generated'][i])
+        streamlit.markdown("""---""") 
+    with tab2:
       for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
         message(streamlit.session_state['past'][i], is_user = True, key = str(i) + '_user', avatar_style = "adventurer", seed = 678)
         message(streamlit.session_state['generated'][i], key = str(i), avatar_style = "bottts", seed = 456)
-    with tab2:
-      for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
-        streamlit.markdown(streamlit.session_state['past'][i])
-        streamlit.markdown(streamlit.session_state['generated'][i])
-        streamlit.markdown("""---""") 
 
 def configure_azure_openai():
   # Set default Azure credential
