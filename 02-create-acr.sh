@@ -4,7 +4,7 @@
 source ./set-variables.sh
 
 # Check if ACR resource group exists
-az group show --name $acrResourceGroupName &>/dev/null
+az group show --name $acrResourceGrougName &>/dev/null
 if [[ $? != 0 ]]; then
    az group create \
     --name $acrResourceGroupName \
