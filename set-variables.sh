@@ -5,7 +5,7 @@ tenantId=$(az account show --query tenantId --output tsv)
 
 # ACR
 acrName="charliliacr"
-acrResourceGrougName="aks-azureopenai"
+acrResourceGroupName="aks-azureopenai"
 location="eastus"
 attachAcr=false
 imageName="mychatbot"

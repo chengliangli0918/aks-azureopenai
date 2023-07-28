@@ -10,5 +10,5 @@ az cognitiveservices account purge -n $openAiName -g $openAiResourceGroupName -l
 
 echo "Delete other Azure resources in other resource groups..."
 az group delete -g $openAiResourceGroupName -y --no-wait
-az group delete -g $acrResourceGrougName -y --no-wait
+az group delete -g $acrResourceGroupName -y --no-wait
 az group delete -g $aksResourceGroupName -y --no-wait
