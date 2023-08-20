@@ -38,5 +38,5 @@ deploymentTemplate="deployment.yaml"
 serviceTemplate="service.yaml"
 
 # Chatbot argument
-title="Chatbot backed by AKS and Azure OpenAI"
+title="Chatbot running on Azure Kubernetes Service, powered by Azure OpenAI"
 temperature="0.5"
