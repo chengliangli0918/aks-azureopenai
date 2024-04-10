@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import streamlit
+
 from azure.identity import DefaultAzureCredential
 from dotenv import dotenv_values
 from dotenv import load_dotenv
@@ -25,6 +26,9 @@ model = os.getenv("AZURE_OPENAI_MODEL")
 temperature = float(os.environ.get("TEMPERATURE", 0.5))
 default_credential = None
 image_width = 80
+file = open("/etc/hostname", "r")
+hostname = file.read()
+file.close()
 
 def main():
   # config azure openai
@@ -61,6 +65,7 @@ def main():
     for i in range(len(streamlit.session_state['generated']) - 1, -1, -1):
        streamlit.markdown("**:blue[{}]**".format(streamlit.session_state['past'][i]))
        streamlit.markdown(streamlit.session_state['generated'][i])
+       streamlit.markdown("---answered by " + str(hostname))
        streamlit.markdown("""---""")
 
 def configure_azure_openai():
@@ -85,7 +90,7 @@ def configure_azure_openai():
 
 def customize_streamlit_ui():
   # Customize Streamlit UI using CSS
-  streamlit.set_page_config(page_title='MyChatbot on AKS and AzureOpenAI')
+  streamlit.set_page_config(page_title='Charlili chatbot on AKS managed AzD bare metals, powered by Azure OpenAI')
   streamlit.markdown("""
   <style>
 
