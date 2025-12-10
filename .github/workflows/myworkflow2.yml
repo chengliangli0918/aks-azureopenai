@@ -40,15 +40,15 @@ on:
 env:
   ACR_RESOURCE_GROUP: charlili-rg
   AZURE_CONTAINER_REGISTRY: charliliaks1registry
-  CONTAINER_NAME: image-workflow-1765403075824
-  CLUSTER_NAME: charliliaks2
+  CONTAINER_NAME: image-workflow-1765405063772
+  CLUSTER_NAME: charliliaks1
   CLUSTER_RESOURCE_GROUP: charlili-rg
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/managedClusters
   DEPLOYMENT_MANIFEST_PATH: |
     ./service.yaml
   DOCKER_FILE: ./Dockerfile
   BUILD_CONTEXT_PATH: ./
-  NAMESPACE: namespace-workflow-1765403075824
+  NAMESPACE: namespace-workflow-1765405063772
   ENABLENAMESPACECREATION: false
   AUTH_TYPE: SERVICE_PRINCIPAL
 
