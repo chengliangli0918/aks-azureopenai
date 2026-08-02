@@ -32,3 +32,7 @@ For more information on Azure OpenAI Service, see the following articles:
 
 - [Azure OpenAI Service models](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
 - [What is Azure OpenAI Service?](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
